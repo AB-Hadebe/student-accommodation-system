@@ -8,11 +8,12 @@ import java.util.Date;
 public class StudentResponse {
     private Long id;
     private String phoneNumber;
+    private String studentNumber;
     private String dateOfBirth;
     private Date registrationDate;
     private String gender;
     private String specialRequirements;
-    private InstitutionResponse institution;
-    private YearOfStudyResponse yearOfStudy;
-    private UserData user;
+    private Long institutionId;
+    private Long yearOfStudyId;
+    private Long userId;
 }

@@ -52,6 +52,8 @@ CREATE TABLE student (
 CREATE TABLE document_type (
                                id SERIAL PRIMARY KEY,
                                type_name VARCHAR(50) NOT NULL UNIQUE,
+                                description VARCHAR(255),
+                                is_required BOOLEAN NOT NULL DEFAULT FALSE,
                                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -62,6 +64,7 @@ CREATE TABLE document (
     document_name VARCHAR(100) NOT NULL,
     document_type_id INT NOT NULL,
     document_path VARCHAR(255) NOT NULL,
+    document_status VARCHAR(20) NOT NULL DEFAULT 'PENDING',
     student_id INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -69,6 +72,45 @@ CREATE TABLE document (
     FOREIGN KEY (student_id) REFERENCES student(id) ON DELETE CASCADE
 );
 
+-- Create Application table
+CREATE TABLE application (
+    id SERIAL PRIMARY KEY,
+    application_code VARCHAR(50) NOT NULL UNIQUE,
+    application_date DATE DEFAULT CURRENT_DATE,
+    status VARCHAR(20) NOT NULL DEFAULT 'PENDING',
+    student_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (student_id) REFERENCES student(id) ON DELETE CASCADE
+);
+
+-- Create Room table
+CREATE TABLE room (
+    id SERIAL PRIMARY KEY,
+    room_number VARCHAR(20) NOT NULL UNIQUE,
+    capacity INT NOT NULL,
+    building VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+--Create Room Allocation table
+CREATE TABLE room_allocation (
+    id SERIAL PRIMARY KEY,
+    allocation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    student_id INT NOT NULL,
+    room_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (student_id) REFERENCES student(id) ON DELETE CASCADE,
+    FOREIGN KEY (room_id) REFERENCES room(id) ON DELETE CASCADE
+);
+
+--Create initial data for room
+INSERT INTO room (room_number, capacity, building) VALUES
+('101', 2, 'Main Building'),
+('102', 4, 'Science Block'),
+('103', 3, 'Arts Wing');
 
 
 
@@ -86,8 +128,9 @@ INSERT INTO year_of_study (year) VALUES
 ('Postgraduate');
 
 --insert document type
-INSERT INTO document_type (type_name) VALUES
-('Proof of Enrollment'),
-('ID/Passport'),
-('Medical Report'),
-('Other');
+INSERT INTO document_type (type_name, description, is_required) VALUES
+('ID Document', 'National ID or Passport', TRUE),
+('Proof of Address', 'Utility bill or bank statement', TRUE),
+('Proof of Enrollment', 'Current enrollment verification', TRUE),
+('Financial Aid Application', 'Application for financial assistance', FALSE),
+('Medical Certificate', 'Health clearance certificate', FALSE);
