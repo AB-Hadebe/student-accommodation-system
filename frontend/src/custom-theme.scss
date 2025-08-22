@@ -1,0 +1,107 @@
+// Custom Theming for Angular Material with Apple Design System
+// For more information: https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+// Include the common styles for Angular Material
+@include mat.core();
+
+// Define the theme using the new M3 Material You theming
+$app-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$blue-palette,
+    tertiary: mat.$orange-palette,
+  ),
+  typography: (
+    brand-family: 'Inter',
+    plain-family: 'Inter',
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+// Apply the theme to Angular Material components - must be wrapped in a selector for M3 themes
+html {
+  @include mat.all-component-themes($app-theme);
+}
+
+// Apple-inspired customizations
+html {
+  --mdc-filled-button-label-text-font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  --mdc-outlined-button-label-text-font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  --mdc-text-button-label-text-font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+}
+
+// Custom Material component styles with Apple aesthetics
+.mat-mdc-card {
+  border-radius: 16px !important;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.mat-mdc-button {
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  text-transform: none !important;
+  min-height: 44px !important;
+  padding: 8px 24px !important;
+}
+
+.mat-mdc-raised-button {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 12px !important;
+}
+
+.mat-mdc-outlined-button {
+  border-width: 1.5px !important;
+  border-radius: 12px !important;
+}
+
+.mat-mdc-form-field {
+  .mat-mdc-text-field-wrapper {
+    border-radius: 12px !important;
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+  
+  .mdc-notched-outline {
+    border-radius: 12px !important;
+    border-width: 1.5px !important;
+  }
+}
+
+.mat-mdc-select {
+  .mat-mdc-select-trigger {
+    border-radius: 12px !important;
+  }
+}
+
+.mat-mdc-checkbox {
+  .mdc-checkbox {
+    border-radius: 6px !important;
+  }
+}
+
+.mat-mdc-radio-button {
+  .mdc-radio .mdc-radio__native-control:checked + .mdc-radio__background .mdc-radio__inner-circle {
+    border-width: 8px !important;
+  }
+}
+
+// Smooth transitions for Apple-like feel
+* {
+  transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
+}
+
+// Provide CSS variables fallback for runtime components
+:root {
+  --color-primary: #1976d2;
+  --color-primary-light: #bbdefb;
+  --color-accent: #ff9800;
+  --color-warn: #f44336;
+  --border-radius: 12px;
+  --border-radius-large: 16px;
+  --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.1);
+}

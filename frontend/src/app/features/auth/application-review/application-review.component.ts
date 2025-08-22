@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatChipsModule } from '@angular/material/chips';
 import { AuthService } from '../../../core/services/auth.service';
 import { DocumentData } from '../../../core/models/document.model';
 import { DocumentService } from '../../../core/services/document.service';
@@ -18,10 +27,22 @@ import { ApplicationService } from '../../../core/services/application.service';
   templateUrl: './application-review.component.html',
   styleUrls: ['./application-review.component.css'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
+    MatDividerModule,
+    MatChipsModule
+  ]
 })
 export class ApplicationReviewComponent implements OnInit {
   isSubmitting = false;
+  termsAccepted = false;
   currentUser: User | null = null;
   studentProfile: StudentResponse | null = null;
   documents: DocumentData[] = [];

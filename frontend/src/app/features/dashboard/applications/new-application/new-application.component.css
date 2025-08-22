@@ -8,6 +8,24 @@
     transition: var(--transition);
 }
 
+.page-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.application-card {
+    border-radius: var(--border-radius);
+    padding: 1rem;
+}
+
+.card-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    color: var(--primary-800);
+}
+
 .form-control, .form-select {
     transition: all 0.3s;
 }
@@ -15,6 +33,51 @@
 .form-control:focus, .form-select:focus {
     border-color: var(--primary);
     box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+}
+
+.form-section {
+    margin-bottom: 1.5rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.form-field {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 1rem;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.terms-section {
+    margin: 2rem 0;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.submit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.button-text {
+    margin-left: 0.5rem;
+}
+
+::ng-deep .mat-form-field-wrapper {
+    margin-bottom: 0.5rem !important;
 }
 
 .btn {
@@ -29,5 +92,13 @@
     .main-content {
         margin-top: 56px;
         padding: 1rem 0;
+    }
+    
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
     }
 }

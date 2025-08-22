@@ -1,90 +1,68 @@
-<div class="container-fluid">
-    <div class="row">
-        <!-- Navigation Header -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom fixed-top">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <h5 class="mb-0">Student Housing</h5>
-                </a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" routerLink="/dashboard">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" routerLink="/applications">Applications</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" routerLink="/documents">Documents</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" routerLink="/profile">Profile</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Main Content -->
-        <div class="main-content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <h2>My Applications</h2>
-                            <button class="btn btn-primary" routerLink="/applications/new">
-                                <i class="bi bi-plus-lg me-2"></i>New Application
-                            </button>
-                        </div>
-
-                        <!-- Applications List -->
-                        <div class="card border-0 shadow-sm">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th>Application ID</th>
-                                            <th>Year</th>
-                                            <th>Status</th>
-                                            <th>Submitted Date</th>
-                                            <th>Type</th>
-                                            <th>Duration</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr *ngFor="let app of applications">
-                                            <td>#{{app.id}}</td>
-                                            <td>{{app.year}}</td>
-                                            <td>
-                          <span class="badge rounded-pill" [ngClass]="getStatusClass(app.status)">
-                            {{app.status}}
-                          </span>
-                                            </td>
-                                            <td>{{app.submittedDate | date}}</td>
-                                            <td>{{app.type}}</td>
-                                            <td>{{app.duration}}</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-outline-primary me-2" [routerLink]="['/applications', app.id]">
-                                                    View Details
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-danger" *ngIf="app.status === 'Pending'">Cancel</button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<main class="main-content">
+  <div class="page-container">
+    <div class="page-header">
+      <h2>My Applications</h2>
+      <button mat-flat-button color="primary" routerLink="/applications/new">
+        <mat-icon>add</mat-icon>
+        New Application
+      </button>
     </div>
-</div>
+
+    <mat-card class="applications-card">
+      <mat-card-content>
+        <div class="table-container">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z1" aria-label="Applications table">
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="applicationId">
+              <th mat-header-cell *matHeaderCellDef> Application ID </th>
+              <td mat-cell *matCellDef="let app"> #{{app.id}} </td>
+            </ng-container>
+
+            <!-- Year Column -->
+            <ng-container matColumnDef="year">
+              <th mat-header-cell *matHeaderCellDef> Year </th>
+              <td mat-cell *matCellDef="let app"> {{app.year}} </td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef> Status </th>
+              <td mat-cell *matCellDef="let app"> <mat-chip [ngClass]="getStatusClass(app.status)">{{app.status}}</mat-chip> </td>
+            </ng-container>
+
+            <!-- Submitted Date Column -->
+            <ng-container matColumnDef="submittedDate">
+              <th mat-header-cell *matHeaderCellDef> Submitted Date </th>
+              <td mat-cell *matCellDef="let app"> {{app.submittedDate | date}} </td>
+            </ng-container>
+
+            <!-- Type Column -->
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef> Type </th>
+              <td mat-cell *matCellDef="let app"> {{app.type}} </td>
+            </ng-container>
+
+            <!-- Duration Column -->
+            <ng-container matColumnDef="duration">
+              <th mat-header-cell *matHeaderCellDef> Duration </th>
+              <td mat-cell *matCellDef="let app"> {{app.duration}} </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Actions </th>
+              <td mat-cell *matCellDef="let app">
+                <button mat-stroked-button color="primary" [routerLink]="['/applications', app.id]">View Details</button>
+                <button *ngIf="app.status === 'Pending'" mat-stroked-button color="warn" (click)="cancelApplication(app.id)">Cancel</button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</main>

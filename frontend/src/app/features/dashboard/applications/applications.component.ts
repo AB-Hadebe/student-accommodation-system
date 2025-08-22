@@ -3,12 +3,20 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 
+// Material imports
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { MatChipsModule } from '@angular/material/chips';
+
 @Component({
   selector: 'app-applications',
   templateUrl: './applications.component.html',
   styleUrls: ['./applications.component.css'],
   standalone: true,
-  imports: [CommonModule, RouterModule]
+  imports: [CommonModule, RouterModule, MatToolbarModule, MatButtonModule, MatIconModule, MatCardModule, MatTableModule, MatChipsModule]
 })
 export class ApplicationsComponent implements OnInit {
   currentUser: any;
@@ -31,22 +39,33 @@ export class ApplicationsComponent implements OnInit {
     }
   ];
 
+  // Material table
+  displayedColumns: string[] = ['applicationId', 'year', 'status', 'submittedDate', 'type', 'duration', 'actions'];
+  dataSource = new MatTableDataSource<any>(this.applications);
+
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.currentUser = this.authService.currentUserValue;
+    this.dataSource.data = this.applications;
   }
 
   getStatusClass(status: string): string {
     switch (status.toLowerCase()) {
       case 'approved':
-        return 'bg-success';
+        return 'status-approved';
       case 'pending':
-        return 'bg-warning';
+        return 'status-pending';
       case 'rejected':
-        return 'bg-danger';
+        return 'status-rejected';
       default:
-        return 'bg-secondary';
+        return 'status-default';
     }
+  }
+
+  cancelApplication(applicationId: string) {
+    // simple client-side cancellation; replace with API call as needed
+    this.applications = this.applications.filter(a => a.id !== applicationId);
+    this.dataSource.data = this.applications;
   }
 }

@@ -2,29 +2,42 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+// Material imports
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatGridListModule } from '@angular/material/grid-list';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   standalone: true,
-  imports: [CommonModule, RouterModule]
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatGridListModule,
+  ],
 })
 export class HomeComponent {
   features = [
     {
       title: 'Easy Registration',
       description: 'Simple and quick registration process for students',
-      icon: 'bi-person-plus'
+      icon: 'person_add',
     },
     {
       title: 'Room Selection',
       description: 'Choose from various accommodation options',
-      icon: 'bi-house-door'
+      icon: 'home',
     },
     {
       title: 'Secure Platform',
       description: 'Safe and secure platform for all transactions',
-      icon: 'bi-shield-check'
-    }
+      icon: 'security',
+    },
   ];
 }

@@ -1,62 +1,107 @@
 <div class="app-container">
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-    <div class="container">
-      <a class="navbar-brand fw-bold text-primary" routerLink="/home">
-        Student Housing
+  <!-- Modern Material Toolbar with Apple aesthetics -->
+  <mat-toolbar class="app-toolbar" color="primary">
+    <div class="toolbar-content">
+      <a class="brand-link" routerLink="/home" mat-button>
+        <mat-icon>home</mat-icon>
+        <span class="brand-text">Student Housing</span>
       </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <ng-container *ngIf="currentUser">
-            <li class="nav-item">
-              <a class="nav-link active" routerLink="/dashboard">Dashboard</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/applications">Applications</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/documents">Documents</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/profile">Profile</a>
-            </li>
-            <li class="nav-item">
-              <button class="btn btn-outline-primary ms-2" (click)="logout()">
-                Logout
-              </button>
-            </li>
-          </ng-container>
-          <ng-container *ngIf="!currentUser">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/home" routerLinkActive="active"
-                >Home</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/login" routerLinkActive="active"
-                >Login</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/signup" routerLinkActive="active"
-                >Sign Up</a
-              >
-            </li>
-          </ng-container>
-        </ul>
+
+      <div class="nav-spacer"></div>
+
+      <!-- Desktop Navigation -->
+      <div class="desktop-nav" *ngIf="!isMobile">
+        <ng-container *ngIf="currentUser; else guestNav">
+          <button mat-button routerLink="/dashboard" routerLinkActive="active-link">
+            <mat-icon>dashboard</mat-icon>
+            <span>Dashboard</span>
+          </button>
+          <button mat-button routerLink="/applications" routerLinkActive="active-link">
+            <mat-icon>assignment</mat-icon>
+            <span>Applications</span>
+          </button>
+          <button mat-button routerLink="/documents" routerLinkActive="active-link">
+            <mat-icon>folder</mat-icon>
+            <span>Documents</span>
+          </button>
+          <button mat-button [matMenuTriggerFor]="userMenu">
+            <mat-icon>account_circle</mat-icon>
+            <span>{{currentUser.firstName}}</span>
+            <mat-icon>expand_more</mat-icon>
+          </button>
+          <mat-menu #userMenu="matMenu" class="user-menu">
+            <button mat-menu-item routerLink="/profile">
+              <mat-icon>person</mat-icon>
+              <span>Profile</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>logout</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-menu>
+        </ng-container>
+
+        <ng-template #guestNav>
+          <button mat-button routerLink="/home" routerLinkActive="active-link">
+            <span>Home</span>
+          </button>
+          <button mat-button routerLink="/login" routerLinkActive="active-link">
+            <span>Login</span>
+          </button>
+          <button mat-raised-button color="accent" routerLink="/signup">
+            <span>Sign Up</span>
+          </button>
+        </ng-template>
       </div>
+
+      <!-- Mobile Navigation -->
+      <button mat-icon-button *ngIf="isMobile" [matMenuTriggerFor]="mobileMenu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #mobileMenu="matMenu" class="mobile-menu">
+        <ng-container *ngIf="currentUser; else guestMobileNav">
+          <button mat-menu-item routerLink="/dashboard">
+            <mat-icon>dashboard</mat-icon>
+            <span>Dashboard</span>
+          </button>
+          <button mat-menu-item routerLink="/applications">
+            <mat-icon>assignment</mat-icon>
+            <span>Applications</span>
+          </button>
+          <button mat-menu-item routerLink="/documents">
+            <mat-icon>folder</mat-icon>
+            <span>Documents</span>
+          </button>
+          <button mat-menu-item routerLink="/profile">
+            <mat-icon>person</mat-icon>
+            <span>Profile</span>
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+          </button>
+        </ng-container>
+
+        <ng-template #guestMobileNav>
+          <button mat-menu-item routerLink="/home">
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+          </button>
+          <button mat-menu-item routerLink="/login">
+            <mat-icon>login</mat-icon>
+            <span>Login</span>
+          </button>
+          <button mat-menu-item routerLink="/signup">
+            <mat-icon>person_add</mat-icon>
+            <span>Sign Up</span>
+          </button>
+        </ng-template>
+      </mat-menu>
     </div>
-  </nav>
+  </mat-toolbar>
+  <!-- Main Content Area -->
   <main class="main-content">
     <router-outlet></router-outlet>
   </main>

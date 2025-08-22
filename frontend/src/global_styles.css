@@ -1,110 +1,309 @@
-/* Import Bootstrap */
-@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
-@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css');
+/* Migrate off Bootstrap -> Angular Material. Bootstrap imports removed. */
+/* Import Tabler Icons for iconography (replace Bootstrap Icons) */
+@import url("https://cdn.jsdelivr.net/npm/@tabler/icons@2.15.0/iconfont/tabler-icons.min.css");
 
-/* Custom Color Variables */
+/*
+  Apple-inspired + Material Design tokens
+  - Use system fonts (SF Pro fallbacks) to respect licensing
+  - 8dp grid system via spacing variables
+  - Rounded corners and elevation per Material
+  - Light / Dark support via prefers-color-scheme
+*/
 :root {
-  --primary: #b2b2c1;
-  --primary-dark: #3a56d4;
-  --secondary: #3ffce0;
-  --accent: #f72585;
-  --success: #4cc9f0;
-  --warning: #f9c74f;
-  --error: #ef476f;
-  --neutral-100: #f8f9fa;
-  --neutral-200: #e9ecef;
-  --neutral-300: #dee2e6;
-  --neutral-400: #ced4da;
-  --neutral-500: #adb5bd;
-  --neutral-600: #6c757d;
-  --neutral-700: #495057;
-  --neutral-800: #343a40;
-  --neutral-900: #212529;
-  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --border-radius: 8px;
-  --transition: all 0.3s ease;
+  /* Typography */
+  --font-sans: -apple-system, "SF Pro Text", "SF Pro Display", "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  --type-base: 16px;
+  --type-scale-ratio: 1.125; /* modest scale for clean UI */
+
+  /* Grid (8dp baseline) */
+  --grid-unit: 8px;
+  --space-0: 0px;
+  --space-1: calc(var(--grid-unit) * 1); /* 8px */
+  --space-2: calc(var(--grid-unit) * 2); /* 16px */
+  --space-3: calc(var(--grid-unit) * 3); /* 24px */
+  --space-4: calc(var(--grid-unit) * 4); /* 32px */
+  --space-6: calc(var(--grid-unit) * 6); /* 48px */
+
+  /* Border radii (Apple-inspired rounded corners) */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+
+  /* Color system (Apple-inspired vibrant primary, semantic tokens) */
+  --color-primary: #0a84ff; /* iOS blue */
+  --color-primary-700: #0066d6;
+  --color-on-primary: #ffffff;
+
+  --color-secondary: #5e5ce6;
+  --color-accent: #ff2d55; /* pink accent */
+
+  --color-success: #34c759;
+  --color-warning: #ff9500;
+  --color-error: #ff3b30;
+
+  --neutral-50: #ffffff;
+  --neutral-100: #f2f2f7;
+  --neutral-200: #e6e6ea;
+  --neutral-300: #d1d1d6;
+  --neutral-400: #b8b8bf;
+  --neutral-500: #8e8e93;
+  --neutral-600: #636366;
+  --neutral-700: #3a3a3c;
+  --neutral-800: #1c1c1e;
+
+  /* Elevation shadows following Material-ish scale, tuned for Apple softness */
+  --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+  --elevation-2: 0 2px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.06);
+  --elevation-3: 0 6px 18px rgba(0, 0, 0, 0.12);
+  --elevation-4: 0 12px 36px rgba(0, 0, 0, 0.16);
+
+  /* Motion */
+  --motion-fast: 150ms;
+  --motion-medium: 250ms;
+  --motion-spring: cubic-bezier(0.2, 0.9, 0.3, 1);
+
+  /* Accessibility */
+  --focus-ring-color: rgba(10, 132, 255, 0.35);
+  --focus-ring-width: 3px;
+}
+
+/* Dark theme overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-on-primary: #000000;
+    --neutral-50: #0b0b0c;
+    --neutral-100: #111113;
+    --neutral-200: #1a1a1c;
+    --neutral-300: #2c2c2e;
+    --neutral-400: #3a3a3c;
+    --neutral-500: #636366;
+    --neutral-600: #8e8e93;
+    --neutral-700: #aeaeb2;
+    --neutral-800: #ffffff;
+
+    /* Softer shadows on dark */
+    --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.25);
+    --elevation-2: 0 2px 6px rgba(0, 0, 0, 0.32);
+    --elevation-3: 0 6px 18px rgba(0, 0, 0, 0.4);
+    --elevation-4: 0 12px 36px rgba(0, 0, 0, 0.5);
+  }
 }
 
 /* Base styles */
+html,
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
-  line-height: 1.5;
-  color: var(--neutral-800);
-  background-color: var(--neutral-100);
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--type-base);
+  color: var(--neutral-700);
+  background-color: var(--neutral-50);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1.2;
-  margin-bottom: 1rem;
-  color: var(--neutral-900);
+/* Typography scale (simple) */
+h1 {
+  font-size: calc(var(--type-base) * 2.25);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+h2 {
+  font-size: calc(var(--type-base) * 1.75);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+h3 {
+  font-size: calc(var(--type-base) * 1.375);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+.h4,
+h4 {
+  font-size: calc(var(--type-base) * 1.125);
+  font-weight: 600;
+}
+h5 {
+  font-size: calc(var(--type-base) * 1);
+  font-weight: 600;
+}
+h6 {
+  font-size: calc(var(--type-base) * 0.875);
+  font-weight: 600;
 }
 
-/* Button Styles */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Buttons - Apple minimalist + Material affordance */
+.btn {
+  border-radius: var(--radius-md);
+  transition: transform var(--motion-fast) var(--motion-spring),
+    box-shadow var(--motion-fast) ease;
+}
 .btn-primary {
-  background-color: var(--primary);
-  border-color: var(--primary);
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  border: none;
+  box-shadow: var(--elevation-1);
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  transform: translateY(-1px);
+  box-shadow: var(--elevation-2);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid transparent;
 }
 
-.btn-primary:hover {
-  background-color: var(--primary-dark);
-  border-color: var(--primary-dark);
-}
-
-/* Card styles */
+/* Cards */
 .card {
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  transition: var(--transition);
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-1);
+  transition: box-shadow var(--motion-medium) var(--motion-spring),
+    transform var(--motion-medium) var(--motion-spring);
+  background: var(--neutral-50);
 }
-
 .card:hover {
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--elevation-2);
+  transform: translateY(-2px);
 }
 
-/* Form styles */
+/* Forms */
 .form-control {
-  border-radius: var(--border-radius);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--neutral-200);
+  padding: calc(var(--space-1) * 0.75) calc(var(--space-2));
+  transition: box-shadow var(--motion-fast) ease,
+    border-color var(--motion-fast) ease;
 }
-
 .form-control:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+  outline: none;
+  border-color: var(--color-primary-700);
+  box-shadow: 0 6px 14px rgba(10, 132, 255, 0.12);
 }
 
-/* Animation classes */
-.fade-in {
-  animation: fadeIn 0.5s ease-in;
+/* Accessible focus indicator using :focus-visible */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--focus-ring-width) var(--focus-ring-color);
+  border-radius: calc(var(--radius-md) + 2px);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* Elevation utility classes */
+.elevation-1 {
+  box-shadow: var(--elevation-1);
+}
+.elevation-2 {
+  box-shadow: var(--elevation-2);
+}
+.elevation-3 {
+  box-shadow: var(--elevation-3);
+}
+.elevation-4 {
+  box-shadow: var(--elevation-4);
 }
 
-.slide-up {
-  animation: slideUp 0.5s ease-out;
+/* Subtle ripple placeholder (Angular Material provides real ripple) */
+.ripple-subtle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(0, 0, 0, 0.02)
+  );
+  mix-blend-mode: overlay;
+  opacity: 0;
+  transition: opacity 220ms var(--motion-spring);
+}
+.btn:active .ripple-subtle::after,
+.card:active .ripple-subtle::after {
+  opacity: 1;
 }
 
-@keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+/* Layout helpers using 8dp grid */
+.container-8 {
+  padding-left: var(--space-3);
+  padding-right: var(--space-3);
+}
+.row-gap-1 {
+  gap: var(--space-1);
+}
+.row-gap-2 {
+  gap: var(--space-2);
+}
+.padding-1 {
+  padding: var(--space-1);
+}
+.padding-2 {
+  padding: var(--space-2);
+}
+.margin-1 {
+  margin: var(--space-1);
+}
+.margin-2 {
+  margin: var(--space-2);
 }
 
-/* Responsive utilities */
+/* Utility for consistent control heights (Apple friendly) */
+.control-height-sm {
+  height: 36px;
+}
+.control-height-md {
+  height: 44px;
+}
+.control-height-lg {
+  height: 52px;
+}
+
+/* Small motion helpers (spring-like) */
+.motion-enter {
+  transition: transform var(--motion-medium) var(--motion-spring),
+    opacity var(--motion-medium);
+}
+.motion-leave {
+  transition: transform var(--motion-fast) ease, opacity var(--motion-fast);
+}
+
+/* Accessibility helpers */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .mobile-only {
-    display: block;
+  h1 {
+    font-size: calc(var(--type-base) * 1.75);
   }
-  .desktop-only {
-    display: none;
+  h2 {
+    font-size: calc(var(--type-base) * 1.375);
   }
 }
 
-@media (min-width: 769px) {
-  .mobile-only {
-    display: none;
-  }
-  .desktop-only {
-    display: block;
-  }
-}
+/* Guidance comment for developers:
+   - Install Angular Material and enable BrowserAnimationsModule
+   - Create a custom theme using Angular Material theming (scss) using the tokens above
+   - Use Angular Material ripples for interactive controls and rely on these tokens for colors, spacing, elevation
+*/
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

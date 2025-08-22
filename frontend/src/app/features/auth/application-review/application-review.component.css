@@ -1,19 +1,341 @@
+/* Application Review Component - Material Design */
+:host {
+  display: block;
+  padding: 24px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.review-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.review-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.15),
+    0 6px 20px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.review-header {
+  text-align: center;
+  padding: 32px 24px 24px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.review-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.review-subtitle {
+  font-size: 16px;
+  color: #64748b;
+  margin: 8px 0 0;
+  font-weight: 400;
+}
+
+.review-content {
+  padding: 24px;
+}
+
+.progress-section {
+  margin-bottom: 32px;
+}
+
+.progress-section mat-progress-bar {
+  height: 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.progress-text {
+  text-align: center;
+  color: #64748b;
+  font-size: 14px;
+  margin: 0;
+  font-weight: 500;
+}
+
+.review-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .review-section {
-    transition: var(--transition);
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.review-section:hover {
-    transform: translateY(-2px);
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 16px 0;
 }
 
-.card {
-    transition: var(--transition);
+.section-title mat-icon {
+  color: #667eea;
+  font-size: 24px;
 }
 
-.card:hover {
-    box-shadow: var(--box-shadow);
+.info-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.bi-check-circle-fill {
-    color: var(--success);
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-weight: 500;
+  color: #475569;
+  min-width: 120px;
+  flex-shrink: 0;
+}
+
+.info-value {
+  font-weight: 600;
+  color: #1e293b;
+  text-align: right;
+  word-break: break-word;
+}
+
+.documents-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.document-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.document-icon {
+  font-size: 20px;
+}
+
+.success-icon {
+  color: #4caf50;
+}
+
+.warning-icon {
+  color: #ff9800;
+}
+
+.document-name {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.no-documents {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #fff3cd;
+  border-radius: 8px;
+  color: #856404;
+}
+
+.terms-section {
+  background: #eff6ff;
+  border-radius: 12px;
+  padding: 20px;
+  border-left: 4px solid #3b82f6;
+}
+
+.terms-checkbox {
+  font-size: 16px;
+  color: #1e40af;
+}
+
+.terms-checkbox ::ng-deep .mat-checkbox-label {
+  line-height: 1.5;
+}
+
+.review-actions {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  background: #f8fafc;
+}
+
+.submit-button {
+  min-width: 200px;
+  height: 48px;
+  border-radius: 24px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: none;
+  font-size: 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.submit-button:hover:not([disabled]) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  transform: none;
+  box-shadow: none;
+}
+
+.button-spinner {
+  margin-right: 8px;
+}
+
+mat-divider {
+  margin: 24px 0;
+  border-color: #e2e8f0;
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  :host {
+    padding: 16px;
+  }
+  
+  .review-container {
+    padding: 0 8px;
+  }
+  
+  .review-header {
+    padding: 24px 16px 20px;
+  }
+  
+  .review-title {
+    font-size: 24px;
+  }
+  
+  .review-content {
+    padding: 20px 16px;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .info-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .info-value {
+    text-align: left;
+  }
+  
+  .review-actions {
+    padding: 20px 16px;
+  }
+  
+  .submit-button {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 18px;
+  }
+  
+  .info-label {
+    min-width: auto;
+  }
+  
+  .terms-section {
+    padding: 16px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .review-card,
+  .review-section,
+  .submit-button {
+    animation: none;
+    transition: none;
+  }
+  
+  .submit-button:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .review-card {
+    border: 2px solid #000;
+  }
+  
+  .info-card,
+  .terms-section {
+    border: 1px solid #000;
+  }
+  
+  .section-title mat-icon {
+    color: #000;
+  }
 }

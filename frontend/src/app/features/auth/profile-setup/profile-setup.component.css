@@ -1,0 +1,238 @@
+/* Profile Setup Component - Apple-inspired Material Design */
+
+.profile-setup-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.setup-wrapper {
+  width: 100%;
+  max-width: 800px;
+}
+
+.setup-card {
+  border-radius: var(--border-radius-lg) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.setup-card mat-card-content {
+  padding: var(--spacing-xl) !important;
+}
+
+/* Header Styles */
+.setup-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.welcome-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-sans);
+}
+
+.welcome-subtitle {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0;
+}
+
+/* Progress Section */
+.progress-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.setup-progress {
+  height: 8px !important;
+  border-radius: 4px !important;
+  margin-bottom: var(--spacing-md);
+}
+
+.setup-progress .mat-mdc-progress-bar-fill::after {
+  background-color: var(--color-primary) !important;
+}
+
+.progress-text {
+  text-align: center;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0;
+}
+
+/* Form Styles */
+.profile-form {
+  width: 100%;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-field {
+  width: 100%;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Material Form Field Customizations */
+.mat-mdc-form-field {
+  --mdc-filled-text-field-container-shape: var(--border-radius-md);
+  --mdc-outlined-text-field-container-shape: var(--border-radius-md);
+}
+
+.mat-mdc-form-field-focus-overlay {
+  border-radius: var(--border-radius-md);
+}
+
+/* Submit Section */
+.submit-section {
+  text-align: center;
+  margin-top: var(--spacing-xl);
+}
+
+.submit-button {
+  min-width: 280px;
+  height: 48px;
+  border-radius: var(--border-radius-md) !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  letter-spacing: 0.02em;
+  text-transform: none !important;
+  box-shadow: 0 2px 8px rgba(10, 132, 255, 0.3) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.submit-button:hover:not([disabled]) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(10, 132, 255, 0.4) !important;
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.button-spinner {
+  margin-right: var(--spacing-sm);
+}
+
+.submit-button mat-icon {
+  margin-right: var(--spacing-sm);
+}
+
+/* Select Panel Customization */
+.mat-mdc-select-panel {
+  border-radius: var(--border-radius-md) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Datepicker Customization */
+.mat-datepicker-popup {
+  border-radius: var(--border-radius-md) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-setup-container {
+    padding: var(--spacing-md);
+  }
+
+  .setup-card mat-card-content {
+    padding: var(--spacing-lg) !important;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .welcome-title {
+    font-size: 24px;
+  }
+
+  .submit-button {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .setup-card mat-card-content {
+    padding: var(--spacing-md) !important;
+  }
+
+  .welcome-title {
+    font-size: 22px;
+  }
+}
+
+/* Animation Classes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-form {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Focus States for Better Accessibility */
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-focus-overlay {
+  opacity: 0.05;
+}
+
+/* Error States */
+.mat-mdc-form-field.mat-form-field-invalid .mat-mdc-text-field-wrapper {
+  border-color: var(--color-error) !important;
+}
+
+/* Loading State */
+.submit-button[disabled] .button-spinner {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* High Contrast Support */
+@media (prefers-contrast: high) {
+  .setup-card {
+    border: 2px solid #000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  }
+  
+  .welcome-title {
+    color: #000;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .submit-button {
+    transition: none !important;
+  }
+  
+  .submit-button:hover:not([disabled]) {
+    transform: none;
+  }
+  
+  .profile-form {
+    animation: none;
+  }
+}

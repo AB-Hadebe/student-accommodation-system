@@ -5,12 +5,27 @@ import { AuthService } from "../../../core/services/auth.service";
 import { ApplicationService } from "../../../core/services/application.service";
 import { Application } from "../../../core/models/application.model";
 
+// Material imports
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
+
 @Component({
   selector: "app-application-confirmation",
   templateUrl: "./application-confirmation.component.html",
   styleUrls: ["./application-confirmation.component.css"],
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [
+    CommonModule, 
+    RouterModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatChipsModule,
+    MatDividerModule
+  ],
 })
 export class ApplicationConfirmationComponent implements OnInit {
   currentUser: any;

@@ -3,26 +3,40 @@
     padding: 2rem 0;
 }
 
-.card {
-    border-radius: var(--border-radius);
-    transition: var(--transition);
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.table th {
-    font-weight: 600;
-    color: var(--neutral-700);
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
-.badge {
-    padding: 0.5em 1em;
+.applications-card {
+  border-radius: var(--border-radius);
 }
 
-.btn-outline-primary {
-    transition: all 0.3s;
+.table-container {
+  overflow: auto;
 }
 
-.btn-outline-primary:hover {
-    transform: translateY(-2px);
+mat-chip.status-approved {
+  background: var(--success-500) !important;
+  color: white;
+}
+
+mat-chip.status-pending {
+  background: var(--warning-500) !important;
+  color: black;
+}
+
+mat-chip.status-rejected {
+  background: var(--danger-500) !important;
+  color: white;
 }
 
 @media (max-width: 768px) {
