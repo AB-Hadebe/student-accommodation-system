@@ -3,7 +3,7 @@
   display: block;
   padding: 24px;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 .confirmation-container {
@@ -16,9 +16,7 @@
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   border-radius: 16px;
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.15),
-    0 6px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 6px 20px rgba(0, 0, 0, 0.1);
   animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 }
@@ -32,9 +30,18 @@
 .confirmation-icon {
   font-size: 64px;
   color: #4caf50;
-  animation: scaleIn 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+  animation: popBounce 1s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both,
+    glowPulse 2.5s ease-in-out infinite;
   margin-bottom: 16px;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 12px #a7ffb0);
+  background: linear-gradient(135deg, #e0ffe7 0%, #f5fff9 100%);
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  box-shadow: 0 4px 24px rgba(76, 175, 80, 0.18);
 }
 
 .confirmation-title {
@@ -50,6 +57,57 @@
   color: #64748b;
   margin: 8px 0 0;
   font-weight: 400;
+}
+
+.welcome-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 18px;
+  font-family: var(--font-sans);
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.welcome-subtitle {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0;
+  font-family: var(--font-sans);
+  text-align: center;
+}
+
+.setup-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.success-icon {
+  font-size: 38px;
+  color: #6ee7b7; /* Lighter green */
+  background: linear-gradient(135deg, #e0fff4 0%, #f5fff9 100%);
+  border-radius: 50%;
+  box-shadow: 0 2px 12px rgba(110, 231, 183, 0.12);
+  padding: 8px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: popBounce 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
+}
+
+.setup-header {
+  text-align: center;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .confirmation-content {
@@ -174,6 +232,15 @@
   border-radius: 16px;
 }
 
+.status-chip.status-warning {
+  background: #fffde7;
+  color: #b59f3b;
+  border: 1.5px solid #fff9c4;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(255, 249, 196, 0.18);
+  letter-spacing: 0.01em;
+}
+
 /* Animations */
 @keyframes scaleIn {
   from {
@@ -197,33 +264,70 @@
   }
 }
 
+@keyframes popBounce {
+  0% {
+    transform: scale(0.2) rotate(-30deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.15) rotate(8deg);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.95) rotate(-4deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 #a7ffb0, 0 2px 12px rgba(52, 199, 89, 0.12);
+  }
+  50% {
+    box-shadow: 0 0 12px 4px #a7ffb0, 0 2px 12px rgba(52, 199, 89, 0.12);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 #a7ffb0, 0 4px 24px rgba(76, 175, 80, 0.18);
+  }
+  50% {
+    box-shadow: 0 0 16px 8px #a7ffb0, 0 4px 24px rgba(76, 175, 80, 0.18);
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   :host {
     padding: 16px;
   }
-  
+
   .confirmation-container {
     padding: 0 8px;
   }
-  
+
   .confirmation-header {
     padding: 24px 16px 20px;
   }
-  
+
   .confirmation-title {
     font-size: 24px;
   }
-  
+
   .confirmation-content {
     padding: 20px 16px;
   }
-  
+
   .action-buttons {
     flex-direction: column;
     padding: 20px 16px;
   }
-  
+
   .action-button {
     width: 100%;
     min-width: auto;
@@ -238,7 +342,7 @@
     animation: none;
     transition: none;
   }
-  
+
   .action-button:hover {
     transform: none;
   }
@@ -249,7 +353,7 @@
   .confirmation-card {
     border: 2px solid #000;
   }
-  
+
   .application-details,
   .info-section {
     border: 1px solid #000;

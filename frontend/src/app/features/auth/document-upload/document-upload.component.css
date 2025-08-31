@@ -3,7 +3,7 @@
   display: block;
   padding: 24px;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 .upload-container {
@@ -16,9 +16,7 @@
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   border-radius: 16px;
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.15),
-    0 6px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 6px 20px rgba(0, 0, 0, 0.1);
   animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 }
@@ -27,6 +25,11 @@
   text-align: center;
   padding: 32px 24px 24px;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.setup-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
 }
 
 .upload-title {
@@ -60,10 +63,8 @@
 
 .progress-text {
   text-align: center;
-  color: #64748b;
   font-size: 14px;
-  margin: 0;
-  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .upload-form {
@@ -109,10 +110,19 @@
 }
 
 .document-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
-  color: #2c3e50;
-  margin: 0 0 8px 0;
+  color: var(--color-primary);
+  margin-bottom: 14px;
+  font-family: var(--font-sans);
+}
+
+.documents-title {
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--color-primary, #222);
+  margin-bottom: 12px;
+  font-family: var(--font-sans, 'SF Pro', 'Segoe UI', Arial, sans-serif);
 }
 
 .document-description {
@@ -314,47 +324,47 @@
   :host {
     padding: 16px;
   }
-  
+
   .upload-container {
     padding: 0 8px;
   }
-  
+
   .upload-header {
     padding: 24px 16px 20px;
   }
-  
+
   .upload-title {
     font-size: 24px;
   }
-  
+
   .upload-content {
     padding: 20px 16px;
   }
-  
+
   .document-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
   }
-  
+
   .upload-actions {
     padding: 20px 16px;
   }
-  
+
   .continue-button {
     width: 100%;
     min-width: auto;
   }
-  
+
   .file-input-label {
     padding: 20px 16px;
     min-height: 70px;
   }
-  
+
   .file-input-label mat-icon {
     font-size: 28px;
   }
-  
+
   .upload-text {
     font-size: 14px;
   }
@@ -364,7 +374,7 @@
   .document-title {
     font-size: 16px;
   }
-  
+
   .file-input-label {
     flex-direction: column;
     gap: 8px;
@@ -381,7 +391,7 @@
     animation: none;
     transition: none;
   }
-  
+
   .continue-button:hover,
   .document-upload-card:hover {
     transform: none;
@@ -393,15 +403,15 @@
   .upload-card {
     border: 2px solid #000;
   }
-  
+
   .document-upload-card {
     border-color: #000;
   }
-  
+
   .file-input-label {
     border-color: #000;
   }
-  
+
   .info-icon {
     color: #000;
   }

@@ -1,9 +1,9 @@
 /* Application Review Component - Material Design */
 :host {
   display: block;
-  padding: 24px;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 24px;
 }
 
 .review-container {
@@ -16,9 +16,7 @@
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   border-radius: 16px;
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.15),
-    0 6px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 6px 20px rgba(0, 0, 0, 0.1);
   animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 }
@@ -45,7 +43,11 @@
 }
 
 .review-content {
-  padding: 24px;
+  padding: 32px 32px 24px 32px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(102, 126, 234, 0.08);
+  margin-bottom: 24px;
 }
 
 .progress-section {
@@ -69,7 +71,7 @@
 .review-sections {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
 }
 
 .review-section {
@@ -77,25 +79,27 @@
 }
 
 .section-title {
-  display: flex;
-  align-items: center;
-  gap: 12px;
   font-size: 20px;
   font-weight: 600;
-  color: #2c3e50;
-  margin: 0 0 16px 0;
+  color: var(--color-primary);
+  margin: 0 0 18px 0;
+  font-family: var(--font-sans);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: -0.2px;
 }
 
 .section-title mat-icon {
   color: #667eea;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .info-card {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  background: #f9fafb;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.04);
 }
 
 .info-grid {
@@ -118,14 +122,14 @@
 
 .info-label {
   font-weight: 500;
-  color: #475569;
+  color: #64748b;
   min-width: 120px;
   flex-shrink: 0;
 }
 
 .info-value {
   font-weight: 600;
-  color: #1e293b;
+  color: #22223b;
   text-align: right;
   word-break: break-word;
 }
@@ -133,14 +137,16 @@
 .documents-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .document-item {
+  background: #f1f5f9;
+  border-radius: 8px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 0;
+  gap: 10px;
 }
 
 .document-icon {
@@ -157,24 +163,24 @@
 
 .document-name {
   font-weight: 500;
-  color: #2c3e50;
+  color: #22223b;
 }
 
 .no-documents {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 16px;
+  padding: 12px 16px;
   background: #fff3cd;
   border-radius: 8px;
   color: #856404;
 }
 
 .terms-section {
-  background: #eff6ff;
-  border-radius: 12px;
-  padding: 20px;
-  border-left: 4px solid #3b82f6;
+  background: #f8fafc;
+  border-radius: 14px;
+  padding: 20px 24px;
+  border-left: 4px solid #667eea;
 }
 
 .terms-checkbox {
@@ -254,42 +260,42 @@ mat-divider {
   :host {
     padding: 16px;
   }
-  
+
   .review-container {
     padding: 0 8px;
   }
-  
+
   .review-header {
     padding: 24px 16px 20px;
   }
-  
+
   .review-title {
     font-size: 24px;
   }
-  
+
   .review-content {
     padding: 20px 16px;
   }
-  
+
   .info-grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
-  
+
   .info-item {
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
   }
-  
+
   .info-value {
     text-align: left;
   }
-  
+
   .review-actions {
     padding: 20px 16px;
   }
-  
+
   .submit-button {
     width: 100%;
     min-width: auto;
@@ -300,11 +306,11 @@ mat-divider {
   .section-title {
     font-size: 18px;
   }
-  
+
   .info-label {
     min-width: auto;
   }
-  
+
   .terms-section {
     padding: 16px;
   }
@@ -318,7 +324,7 @@ mat-divider {
     animation: none;
     transition: none;
   }
-  
+
   .submit-button:hover {
     transform: none;
   }
@@ -329,13 +335,32 @@ mat-divider {
   .review-card {
     border: 2px solid #000;
   }
-  
+
   .info-card,
   .terms-section {
     border: 1px solid #000;
   }
-  
+
   .section-title mat-icon {
     color: #000;
   }
+}
+
+.setup-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.welcome-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 18px;
+  font-family: var(--font-sans);
+}
+
+.welcome-subtitle {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0;
 }

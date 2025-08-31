@@ -86,30 +86,40 @@
 }
 
 .form-field input {
-  font-size: 16px !important;
-  padding: 16px 14px !important;
+  font-size: 13px !important;
+  padding: 4px 6px !important;
+  height: 20px !important;
   color: #1a1a1a !important;
   background: transparent;
+  line-height: 1.2 !important;
 }
 
 .form-field .mat-icon {
   color: rgba(0, 0, 0, 0.5) !important;
-  font-size: 20px !important;
-  width: 20px !important;
-  height: 20px !important;
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+
+/* Reduce mat-form-field overall height */
+.form-field.mat-mdc-form-field {
+  min-height: 28px !important;
 }
 
 .login-button {
-  width: 100% !important;
-  height: 52px !important;
-  border-radius: 16px !important;
-  font-size: 16px !important;
+  width: 200px !important;
+  min-width: 0 !important;
+  align-self: center;
+  height: 40px !important;
+  border-radius: 20px !important;
+  font-size: 14px !important;
   font-weight: 600 !important;
   text-transform: none !important;
   box-shadow: 0 4px 16px rgba(12, 140, 228, 0.3) !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   position: relative;
   overflow: hidden;
+  padding: 0 2px !important;
 }
 
 .login-button:hover:not(:disabled) {
@@ -129,7 +139,7 @@
 .login-divider {
   position: relative;
   text-align: center;
-  margin: 24px 0;
+  margin: 8px 0; /* Decreased vertical spacing */
   color: rgba(0, 0, 0, 0.5);
   font-size: 14px;
   font-weight: 500;
@@ -152,25 +162,33 @@
 }
 
 .signup-button {
-  width: 100% !important;
-  height: 48px !important;
-  border-radius: 12px !important;
-  font-size: 15px !important;
-  font-weight: 500 !important;
+  width: 200px !important;
+  min-width: 0 !important;
+  align-self: center;
+  height: 40px !important;
+  border-radius: 20px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
   text-transform: none !important;
-  border: 1.5px solid rgba(255, 152, 0, 0.3) !important;
-  color: var(--color-accent) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  background: linear-gradient(
+    90deg,
+    #34d399 0%,
+    #10b981 100%
+  ) !important; /* Apple-style green gradient */
+  color: #fff !important;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.18) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 8px !important;
+  gap: 6px !important;
+  padding: 0 2px !important;
+  border: none !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .signup-button:hover {
-  background-color: rgba(255, 152, 0, 0.08) !important;
-  border-color: var(--color-accent) !important;
-  transform: translateY(-1px);
+  background: linear-gradient(90deg, #10b981 0%, #059669 100%) !important;
+  box-shadow: 0 6px 24px rgba(16, 185, 129, 0.28) !important;
 }
 
 .forgot-password {
@@ -228,4 +246,31 @@
 ::ng-deep .warning-snackbar {
   background-color: #ff9800 !important;
   color: white !important;
+}
+
+.setup-header {
+  text-align: center;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 18px;
+  font-family: var(--font-sans);
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.welcome-subtitle {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0;
+  font-family: var(--font-sans);
+  text-align: center;
 }
