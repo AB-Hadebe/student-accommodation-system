@@ -5,7 +5,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "demo": {
+    "frontend": {
       "architect": {
         "build": {
           "builder": "@angular/build:application",
@@ -29,13 +29,12 @@
             "assets": [],
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "outputPath": "dist/demo",
+            "outputPath": "dist/frontend",
             "polyfills": [
               "zone.js"
             ],
             "scripts": [],
             "styles": [
-              "src/custom-theme.scss",
               "src/global_styles.css"
             ],
             "tsConfig": "tsconfig.app.json"
@@ -45,10 +44,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "development": {
-              "buildTarget": "demo:build:development"
+              "buildTarget": "frontend:build:development"
             },
             "production": {
-              "buildTarget": "demo:build:production"
+              "buildTarget": "frontend:build:production"
             }
           },
           "defaultConfiguration": "development"
