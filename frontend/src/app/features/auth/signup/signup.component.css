@@ -30,25 +30,54 @@
   }
 }
 
-.signup-header {
+/* Header Styles for Signup (match login page) */
+.setup-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  margin-bottom: 0;
+  padding: 0;
 }
 
-.signup-title {
-  font-size: 32px !important;
-  font-weight: 700 !important;
-  color: #1a1a1a;
-  margin-bottom: 8px !important;
+.welcome-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+  font-family: var(--font-sans);
   letter-spacing: -0.02em;
+  text-align: center;
+  align-self: center;
 }
 
-.signup-subtitle {
-  font-size: 16px !important;
-  color: #6b7280;
-  font-weight: 400;
+.welcome-subtitle {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.6);
   margin: 0;
+  font-family: var(--font-sans);
+  text-align: center;
+  align-self: center;
+}
+
+/* Remove old signup-title and signup-subtitle styles to avoid conflicts */
+.signup-title,
+.signup-subtitle {
+  all: unset;
+}
+
+.signup-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 32px 0 0 0;
+  border-bottom: none;
+  background: transparent;
+  box-shadow: none;
 }
 
 .signup-content {
@@ -93,21 +122,30 @@
 }
 
 .signup-button {
-  height: 56px !important;
-  border-radius: 16px !important;
-  font-size: 16px !important;
+  width: 200px !important;
+  min-width: 0 !important;
+  align-self: center;
+  height: 40px !important;
+  border-radius: 20px !important;
+  font-size: 14px !important;
   font-weight: 600 !important;
-  letter-spacing: 0.02em !important;
   text-transform: none !important;
-  margin: 16px 0;
+  box-shadow: 0 4px 16px rgba(12, 140, 228, 0.3) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
+  padding: 0 2px !important;
   background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
-  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3) !important;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  margin: 16px 0;
 }
 
 .signup-button:hover:not([disabled]) {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(12, 140, 228, 0.4) !important;
 }
 
 .terms-section {
