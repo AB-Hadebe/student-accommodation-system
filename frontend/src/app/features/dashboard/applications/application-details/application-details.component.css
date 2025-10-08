@@ -3,14 +3,58 @@
     padding: 2rem 0;
 }
 
-.card {
-    border-radius: var(--border-radius);
-    transition: var(--transition);
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
+.page-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.back-button {
+    margin-right: 1rem;
+}
+
+.status-chip-container {
+    margin-left: auto;
+}
+
+.section-title {
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.info-item {
+    margin-bottom: 1rem;
+}
+
+.label {
+    color: var(--neutral-600);
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.value {
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+/* Timeline styles - updated for Material Design */
 .timeline {
     position: relative;
     padding-left: 3rem;
+    margin-top: 2rem;
 }
 
 .timeline-item {
@@ -28,9 +72,10 @@
     width: 1rem;
     height: 1rem;
     border-radius: 50%;
-    background-color: var(--primary);
+    background-color: var(--primary-500);
     border: 2px solid white;
-    box-shadow: 0 0 0 2px var(--primary);
+    box-shadow: 0 0 0 2px var(--primary-500);
+    z-index: 2;
 }
 
 .timeline-item::before {
@@ -41,6 +86,7 @@
     bottom: 0;
     width: 2px;
     background-color: var(--neutral-300);
+    z-index: 1;
 }
 
 .timeline-item:last-child::before {
@@ -51,11 +97,188 @@
     background-color: var(--neutral-100);
     padding: 1rem;
     border-radius: var(--border-radius);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-title {
+    font-weight: 500;
+    margin: 0;
+}
+
+.timeline-date {
+    color: var(--neutral-600);
+    font-size: 0.875rem;
+}
+
+.timeline-description {
+    color: var(--neutral-700);
+    margin: 0;
+}
+
+.document-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Status chip styles */
+.status-success {
+    background-color: var(--success-500) !important;
+    color: white !important;
+}
+
+.status-warning {
+    background-color: var(--warning-500) !important;
+    color: black !important;
+}
+
+.status-danger {
+    background-color: var(--danger-500) !important;
+    color: white !important;
+}
+
+.status-default {
+    background-color: var(--neutral-400) !important;
+}
+
+/* Timeline Material Design Styles for Application Details
+ * Apple-inspired, minimalist, accessible
+ */
+
+.timeline-mat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.timeline-mat-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.timeline-mat-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--mat-primary-100, #e3f2fd);
+  box-shadow: 0 1px 4px rgba(60,60,60,0.04);
+  font-size: 24px;
+}
+
+.timeline-mat-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.timeline-mat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 500;
+  font-size: 1.05rem;
+}
+
+.timeline-mat-title {
+  font-family: 'SF Pro Display', 'Segoe UI', Arial, sans-serif;
+  font-weight: 600;
+  color: var(--mat-primary-700, #1976d2);
+}
+
+.timeline-mat-chip {
+  height: 24px;
+  font-size: 0.85rem;
+  margin-left: 0.25rem;
+}
+
+.timeline-mat-date {
+  margin-left: auto;
+  color: #888;
+  font-size: 0.95em;
+}
+
+.timeline-mat-description {
+  margin-top: 0.15rem;
+  color: #444;
+  font-size: 0.98em;
+  font-family: 'SF Pro Text', 'Segoe UI', Arial, sans-serif;
+}
+
+.timeline-mat-divider {
+  margin-left: 48px;
+  border-top-width: 2px;
+  opacity: 0.12;
+}
+
+@media (max-width: 600px) {
+  .timeline-mat-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  .timeline-mat-date {
+    margin-left: 0;
+  }
+}
+
+/* Status color classes (should match getStatusClass logic) */
+.status-success {
+  background: #e6f4ea !important;
+  color: #219653 !important;
+}
+.status-warning {
+  background: #fff8e1 !important;
+  color: #f9a825 !important;
+}
+.status-danger {
+  background: #ffebee !important;
+  color: #d32f2f !important;
+}
+.status-default {
+  background: #ececec !important;
+  color: #757575 !important;
+}
+
+/* Responsive toolbar navigation */
+.toolbar-nav-desktop {
+  display: flex;
+}
+.toolbar-menu-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .toolbar-nav-desktop {
+    display: none !important;
+  }
+  .toolbar-menu-mobile {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 768px) {
     .main-content {
         margin-top: 56px;
         padding: 1rem 0;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
     }
 }

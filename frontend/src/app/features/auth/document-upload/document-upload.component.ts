@@ -7,6 +7,12 @@ import {
   Validators,
 } from "@angular/forms";
 import { Router } from "@angular/router";
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatChipsModule } from '@angular/material/chips';
 import { AuthService } from "../../../core/services/auth.service";
 import { DocumentTypeService } from "../../../core/services/document-type.service";
 import { DocumentType } from "../../../core/models/document-type.model";
@@ -17,7 +23,16 @@ import { DocumentService } from "../../../core/services/document.service";
   templateUrl: "./document-upload.component.html",
   styleUrls: ["./document-upload.component.css"],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatChipsModule
+  ],
 })
 export class DocumentUploadComponent implements OnInit {
   uploadForm: FormGroup;
@@ -44,6 +59,7 @@ export class DocumentUploadComponent implements OnInit {
     }
     this.documentTypeService.getRequiredDocumentTypes().subscribe({
       next: (documentTypes: any[]) => {
+        console.log("Required document types:", documentTypes);
         this.requiredDocuments = documentTypes;
         documentTypes.forEach((doc) => {
           if (!this.uploadForm.contains(doc.id)) {

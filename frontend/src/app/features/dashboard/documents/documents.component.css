@@ -3,69 +3,80 @@
     padding: 2rem 0;
 }
 
-.card {
-    border-radius: var(--border-radius);
-    transition: var(--transition);
+.app-toolbar .toolbar-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
-.table th {
-    font-weight: 600;
-    color: var(--neutral-700);
+.app-title {
+  font-weight: 700;
 }
 
-.badge {
-    padding: 0.5em 1em;
+.spacer {
+  flex: 1 1 auto;
 }
 
-.btn-outline-primary {
-    transition: all 0.3s;
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.btn-outline-primary:hover {
-    transform: translateY(-2px);
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
-.list-unstyled li {
-    display: flex;
-    align-items: center;
+.documents-card {
+  border-radius: var(--border-radius);
 }
 
-/* Modal Styles */
-.modal {
-    background-color: rgba(0, 0, 0, 0.5);
+.table-container {
+  overflow: auto;
 }
 
-.modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1040;
+.guidelines-card {
+  margin-top: 1rem;
 }
 
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1050;
-    overflow-x: hidden;
-    overflow-y: auto;
-    outline: 0;
+.guidelines-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.modal-dialog {
-    position: relative;
-    pointer-events: auto;
+.guidelines-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
-.modal-content {
-    position: relative;
-    background-color: #fff;
-    pointer-events: auto;
+mat-chip.status-verified {
+  background: var(--success-500) !important;
+  color: white;
+}
+
+mat-chip.status-pending {
+  background: var(--warning-500) !important;
+  color: black;
+}
+
+mat-chip.status-rejected {
+  background: var(--danger-500) !important;
+  color: white;
+}
+
+mat-chip.status-default {
+  background: var(--neutral-300) !important;
+}
+
+/* Remove Bootstrap modal/backdrop styles as dialogs use Angular overlays */
+.modal, .modal-backdrop, .modal-dialog, .modal-content {
+  display: none;
 }
 
 @media (max-width: 768px) {

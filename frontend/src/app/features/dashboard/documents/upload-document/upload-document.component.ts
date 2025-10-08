@@ -1,12 +1,29 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';;
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-upload-document',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule, 
+    MatButtonModule, 
+    MatFormFieldModule, 
+    MatSelectModule, 
+    MatInputModule, 
+    MatIconModule,
+    MatDividerModule,
+    MatProgressSpinnerModule
+  ],
   templateUrl: './upload-document.component.html',
   styleUrls: ['./upload-document.component.css']
 })
@@ -17,6 +34,16 @@ export class UploadDocumentComponent {
   uploadError: string | null = null;
   isUploading = false;
   documents: any[] = [];
+  documentTypes = [
+    { value: 'student-id', viewValue: 'Student ID' },
+    { value: 'passport', viewValue: 'Passport' },
+    { value: 'drivers-license', viewValue: 'Driver\'s License' },
+    { value: 'enrollment-proof', viewValue: 'Proof of Enrollment' },
+    { value: 'academic-transcript', viewValue: 'Academic Transcript' },
+    { value: 'financial-statement', viewValue: 'Financial Statement' },
+    { value: 'medical-record', viewValue: 'Medical Record' },
+    { value: 'other', viewValue: 'Other' }
+  ];
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.uploadForm = this.fb.group({

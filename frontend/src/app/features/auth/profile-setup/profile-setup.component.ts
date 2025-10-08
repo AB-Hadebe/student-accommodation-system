@@ -9,12 +9,39 @@ import { StudentService } from '../../../core/services/student.service';
 import { Institution } from '../../../core/models/institution.model';
 import { YearOfStudy } from '../../../core/models/year-of-study.model';
 
+// Material imports
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 @Component({
   selector: 'app-profile-setup',
   templateUrl: './profile-setup.component.html',
   styleUrls: ['./profile-setup.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatStepperModule,
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ]
 })
 export class ProfileSetupComponent implements OnInit {
   profileForm: FormGroup;
@@ -23,6 +50,13 @@ export class ProfileSetupComponent implements OnInit {
   institutions: Institution[] = [];
   yearsOfStudy: YearOfStudy[] = [];
   
+  // Gender options for the select dropdown
+  genderOptions = [
+    { value: 'male', viewValue: 'Male' },
+    { value: 'female', viewValue: 'Female' },
+    { value: 'other', viewValue: 'Other' },
+    { value: 'prefer-not-to-say', viewValue: 'Prefer not to say' }
+  ];
   
   constructor(
       private fb: FormBuilder,

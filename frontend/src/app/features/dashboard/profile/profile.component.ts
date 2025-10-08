@@ -14,13 +14,14 @@ import { Institution } from "../../../core/models/institution.model";
 import { YearOfStudy } from "../../../core/models/year-of-study.model";
 import { StudentService } from "../../../core/services/student.service";
 import { StudentProfile } from "../../../core/models/student-profile";
+import { MaterialModule } from "../../../shared/material.module";
 
 @Component({
   selector: "app-profile",
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.css"],
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, MaterialModule],
 })
 export class ProfileComponent implements OnInit {
   currentUser: any;

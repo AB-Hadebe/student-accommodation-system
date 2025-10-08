@@ -6,12 +6,47 @@ import { AuthService } from '../../../core/services/auth.service';
 import { DocumentViewerComponent } from './document-viewer/document-viewer.component';
 import {UploadDocumentComponent} from "./upload-document/upload-document.component";
 
+// Material imports
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
+import { MatTableDataSource } from '@angular/material/table';
+
 @Component({
   selector: 'app-documents',
   templateUrl: './documents.component.html',
   styleUrls: ['./documents.component.css'],
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, DocumentViewerComponent, UploadDocumentComponent]
+  imports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    DocumentViewerComponent,
+    UploadDocumentComponent,
+    // Material modules
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ]
 })
 export class DocumentsComponent implements OnInit {
   currentUser: any;
@@ -49,6 +84,10 @@ export class DocumentsComponent implements OnInit {
     }
   ];
 
+  // Material table configuration
+  displayedColumns: string[] = ['name', 'type', 'uploadDate', 'status', 'size', 'actions'];
+  dataSource = new MatTableDataSource<any>(this.documents);
+
   constructor(
       private authService: AuthService,
       private fb: FormBuilder
@@ -60,18 +99,20 @@ export class DocumentsComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.authService.currentUserValue;
+    // ensure data source is in sync
+    this.dataSource.data = this.documents;
   }
 
   getStatusClass(status: string): string {
     switch (status.toLowerCase()) {
       case 'verified':
-        return 'bg-success';
+        return 'status-verified';
       case 'pending':
-        return 'bg-warning';
+        return 'status-pending';
       case 'rejected':
-        return 'bg-danger';
+        return 'status-rejected';
       default:
-        return 'bg-secondary';
+        return 'status-default';
     }
   }
 
@@ -123,14 +164,17 @@ export class DocumentsComponent implements OnInit {
         next: (response) => {
           this.isUploading = false;
           // Add the new document to the list
-          this.documents.unshift({
+          const newDoc = {
             id: response.id,
             name: this.selectedFile!.name,
             type: this.uploadForm.get('documentType')?.value,
             uploadDate: new Date().toISOString(),
             status: 'Pending',
             size: this.formatFileSize(this.selectedFile!.size)
-          });
+          };
+          this.documents.unshift(newDoc);
+          // keep dataSource in sync
+          this.dataSource.data = this.documents;
           this.closeUploadModal();
         },
         error: (error) => {
@@ -162,6 +206,8 @@ export class DocumentsComponent implements OnInit {
     if (confirm('Are you sure you want to delete this document?')) {
       // Here you would typically call your service to delete the document
       this.documents = this.documents.filter(doc => doc.id !== documentId);
+      // keep dataSource in sync
+      this.dataSource.data = this.documents;
     }
   }
 }

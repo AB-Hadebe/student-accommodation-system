@@ -4,18 +4,24 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build"
+    "build": "ng build",
+    "lint": "npm run lint:ts && npm run lint:styles",
+    "lint:ts": "eslint \"src/**/*.{ts,js}\" --ext .ts --max-warnings 0",
+    "lint:styles": "stylelint \"src/**/*.{scss,css}\"",
+    "lint:fix": "eslint \"src/**/*.{ts,js}\" --fix && stylelint \"src/**/*.{scss,css}\" --fix",
+    "format": "prettier --write \"src/**/*.{ts,js,scss,css,html,json,md}\"",
+    "test": "ng test --watch=false"
   },
   "dependencies": {
     "@angular/animations": "^19.2.0",
+    "@angular/cdk": "^19.2.19",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
     "@angular/core": "^19.2.0",
     "@angular/forms": "^19.2.0",
+    "@angular/material": "^19.2.19",
     "@angular/platform-browser": "^19.2.0",
     "@angular/router": "^19.2.0",
-    "bootstrap": "^5.3.2",
-    "@popperjs/core": "^2.11.8",
     "rxjs": "^7.8.1",
     "tslib": "^2.5.0",
     "zone.js": "~0.15.0"
@@ -24,6 +30,23 @@
     "@angular/build": "^19.2.0",
     "@angular/cli": "^19.2.0",
     "@angular/compiler-cli": "^19.2.0",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "eslint": "^8.40.0",
+    "@typescript-eslint/parser": "^6.4.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@angular-eslint/builder": "^19.0.0",
+    "@angular-eslint/eslint-plugin": "^19.0.0",
+    "@angular-eslint/eslint-plugin-template": "^19.0.0",
+    "@angular-eslint/schematics": "^19.0.0",
+    "@angular-eslint/template-parser": "^19.0.0",
+    "prettier": "^2.8.8",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "stylelint": "^15.0.0",
+    "stylelint-scss": "^4.4.0",
+    "stylelint-config-standard": "^30.0.0",
+    "lint-staged": "^14.0.0",
+    "@commitlint/config-conventional": "^17.0.0",
+    "@commitlint/cli": "^17.0.0"
   }
 }
