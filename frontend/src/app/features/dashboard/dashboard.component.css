@@ -1,22 +1,35 @@
 /* Apple-inspired Material Dashboard Design */
 .dashboard-container {
-  padding: 24px;
-  background-color: #fafafa;
-  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  background-color: #f3f4f6;
+  min-height: calc(100vh - 64px); /* account for app toolbar height */
+  box-sizing: border-box;
 }
 
 /* Welcome Section */
 .welcome-section {
-  margin-bottom: 32px;
+  margin-bottom: 24px; /* slightly reduced to keep visual continuity */
 }
 
 .welcome-card {
   background: linear-gradient(135deg, #e3f0ff 0%, #eaf6ff 60%, #2563eb 100%) !important;
   color: #1a237e !important;
-  border-radius: 20px !important;
+  border-radius: 12px; /* keep rounded corners but slightly smaller for edge-to-edge */
   box-shadow: 0 8px 32px rgba(37, 99, 235, 0.13) !important;
   overflow: hidden;
   border: none !important;
+  max-width: none; /* allow welcome card to be full width */
+  margin: 0; /* remove centering */
+  width: 100%;
+}
+
+.welcome-section .welcome-card {
+  max-width: none; /* allow welcome card to be full width */
+  margin: 0; /* remove centering */
+  width: 100%;
+  border-radius: 12px; /* keep rounded corners but slightly smaller for edge-to-edge */
 }
 
 .welcome-content {
@@ -103,8 +116,8 @@
   width: 100%;
   margin: 0 auto;
   padding-bottom: 48px;
-  padding-left: 32px;
-  padding-right: 32px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 @media (max-width: 1200px) {
@@ -141,8 +154,8 @@
   width: 100%;
   margin: 0 auto;
   padding-bottom: 48px;
-  padding-left: 32px;
-  padding-right: 32px;
+  padding-left: 0;
+  padding-right: 0;
   align-items: stretch;
   justify-items: stretch;
 }
@@ -229,11 +242,21 @@
 /* Two-column layout for dashboard */
 .two-column-layout {
   display: grid;
-  grid-template-columns: 340px 1fr; /* left column fixed, right flexible */
+  grid-template-columns: 360px minmax(320px, 1fr);
   gap: 32px;
-  align-items: start;
+  align-items: stretch;
+  height: 100%;
   width: 100%;
-  margin-top: 24px;
+  max-width: none; /* remove center constraint so grid can span full width */
+  margin: 0; /* remove auto-centering */
+  padding: 0 16px; /* small horizontal gutter so content doesn't touch the viewport edge */
+  box-sizing: border-box;
+}
+
+/* Remove left-column internal padding if any and ensure cards fill cell */
+.two-column-layout .left-column {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .two-column-layout .left-column {
@@ -241,20 +264,25 @@
   flex-direction: column;
   gap: 24px;
 }
+.two-column-layout .left-column .mat-mdc-card {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+}
 
 .two-column-layout .right-column {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
-
-/* Ensure cards in columns stretch to fill their column width */
-.two-column-layout .mat-mdc-card {
-  width: 100%;
+.two-column-layout .right-column .documents-card {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Make inner card content distribute vertically */
 .two-column-layout .mat-mdc-card .mat-mdc-card-content {
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -263,11 +291,25 @@
 
 /* Responsive: stack columns on small screens */
 @media (max-width: 1000px) {
-  .two-column-layout {
-    grid-template-columns: 1fr;
+  .dashboard-container {
+    min-height: auto;
   }
-  .actions-card {
-    max-width: none;
+  .two-column-layout {
+    height: auto;
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    margin: 0; /* full width on mobile */
+    gap: 20px;
+    padding: 0 12px; /* slightly reduce gutter on small screens */
+  }
+  .two-column-layout .left-column .mat-mdc-card,
+  .two-column-layout .right-column .documents-card {
+    flex: none;
+    min-height: 240px;
+  }
+  .welcome-section .welcome-card {
+    max-width: 100%;
+    margin: 0;
   }
 }
 
@@ -295,11 +337,11 @@
 }
 
 .mat-mdc-card-header {
-  padding: 20px 24px 0 24px !important;
+  padding: 24px !important;
 }
 
 .mat-mdc-card-content {
-  padding: 24px 24px 20px 24px !important;
+  padding: 24px !important;
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
@@ -315,8 +357,7 @@
 }
 
 /* Application Status Card */
-.status-card {
-}
+/* Removed empty .status-card ruleset to avoid lint warning */
 
 .application-status {
   display: flex;
