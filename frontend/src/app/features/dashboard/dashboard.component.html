@@ -157,7 +157,6 @@
     </div>
   </div>
 
-  <!-- Document Viewer Modal -->
-  <app-document-viewer *ngIf="selectedDocument" [document]="selectedDocument"
-    (close)="closeViewer()"></app-document-viewer>
-</div>
+<!-- Document Viewer Modal -->
+<app-document-viewer *ngIf="selectedDocument" [document]="selectedDocument" (close)="closeViewer()">
+</app-document-viewer>
