@@ -118,6 +118,9 @@
                 <span class="document-name">{{doc.name}}</span>
                 <span class="document-date">{{doc.date | date:'shortDate'}}</span>
               </div>
+              <button mat-icon-button color="primary" [routerLink]="['/applications', app.id]">
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
             </div>
             <mat-chip [ngClass]="getStatusClass(doc.status)" class="document-status">
               {{doc.status}}
@@ -153,6 +156,9 @@
                 <mat-chip [ngClass]="getStatusClass(app.status)">{{app.status}}</mat-chip>
                 <span class="history-room" *ngIf="app.room">{{app.room}}</span>
               </div>
+              <mat-chip [ngClass]="getStatusClass(doc.status)" class="document-status">
+                {{doc.status}}
+              </mat-chip>
             </div>
             <button mat-icon-button color="primary" [routerLink]="['/applications', app.id]">
               <mat-icon>arrow_forward</mat-icon>
@@ -162,7 +168,6 @@
       </mat-card-content>
     </mat-card>
   </div>
-</div>
 
 <!-- Document Viewer Modal -->
 <app-document-viewer *ngIf="selectedDocument" [document]="selectedDocument" (close)="closeViewer()">
